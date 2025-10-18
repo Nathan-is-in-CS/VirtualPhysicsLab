@@ -1,3 +1,6 @@
+// Finals/VirtualPhysicsLab.java
+
+import java.util.InputMismatchException; // Import this
 import java.util.Scanner;
 
 public class VirtualPhysicsLab {
@@ -90,11 +93,21 @@ public class VirtualPhysicsLab {
             System.out.println("\n" + "-".repeat(60));
             experiment.startExperiment();
 
-        } catch (ExperimentException e) {
+        } 
+        // Added a specific catch for bad user input
+        catch (InputMismatchException e) {
+            System.out.println("❌ Input Error: Invalid format. Please enter numbers where required.");
+        }
+        // will now handle errors from your Experiment classes
+        catch (ExperimentException e) {
             System.out.println("❌ Experiment Error: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Input Error: Please check your entries.");
-        } finally {
+        } 
+        // catch any other unexpected errors
+        catch (Exception e) {
+            System.out.println("❌ An unexpected program error occurred: " + e.getMessage());
+            e.printStackTrace(); // Helps with debugging
+        } 
+        finally {
             sc.close();
         }
     }
